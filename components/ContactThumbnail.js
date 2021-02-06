@@ -22,12 +22,12 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
 	},
 	name:{
-		color:'#fff',
+		color:'#000',
 		fontSize: 16,
 		fontWeight:'bold'
 	},
 	phone:{
-		color: '#fff',
+		color: '#000',
 		fontSize:16
 	}	
 });

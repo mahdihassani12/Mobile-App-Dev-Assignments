@@ -12,8 +12,8 @@ export default function Profile({ name, phone, email }){
 				<ContactThumbnail name={name} phone={phone}  />
 			</View>
 			<View style={styles.detailSection} >
-				<Details icon={icon} title={title} subTitle={email} />
-				<Details icon={icon} title={title} subTitle={phone} />
+				<Details icon="email" title="Email" subTitle={email} />
+				<Details icon="phone" title="Work" subTitle={phone} />
 			</View>
 		</View>
 
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		backgroundColor: '#eee',
 		borderBottomColor:'#000',
-		borderBottomWidth: 1
+		borderBottomWidth: 1,
 	},
 	detailSection:{
 		paddingTop: 10
