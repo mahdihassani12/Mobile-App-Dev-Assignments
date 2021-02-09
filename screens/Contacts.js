@@ -14,22 +14,22 @@ const contacts = [
 		{id: '8', name: 'Pablo', email:'Pablo@mail.com'},
 		{id: '9', name: 'David', email:'David@mail.com'},
 ];
-export default function Contacts(){
+export default function Contacts({ navigation }){
 	return (
 		<View>
 			<FlatList 
 				keyExtractor = { (item) => item.id }
 				data={contacts}	
 				renderItem = { ({item}) => {
-					return <ContactListItems name={item.name} phone={item.phone} />
+					return <ContactListItems name={item.name} phone={item.phone} onPress={ () => navigation.navigate('Profile',{item:item}) } />
 				}}
 			/>
 
-			<View style = {styles.floadButton}>
+			<TouchableOpacity style = {styles.floadButton} onPress={ () => navigation.navigate('CreateContacts') }>
 				<Text>
 					<Feather name="plus" size={28} color="white" />
 				</Text>
-			</View>	
+			</TouchableOpacity>	
 
 		</View>
 	)

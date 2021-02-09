@@ -4,7 +4,10 @@ import {MaterialICons} from '@expo/vector-icons';
 import ContactThumbnail from '../components/ContactThumbnail';
 import Details from '../components/Details';
 
-export default function Profile({ name, phone, email }){
+export default function Profile(props){
+const {route} = props
+const {item} = route.params
+const {name, phone , email} = item
 	return (
 
 		<View style={styles.container}>
