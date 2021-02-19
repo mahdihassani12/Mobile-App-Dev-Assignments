@@ -1,29 +1,48 @@
-import React from 'react';
+import React,{useState, useEffect} from 'react';
 import {Text, StyleSheet, View, TouchableOpacity, FlatList} from 'react-native';
 import ContactListItems from '../components/ContactListItems';
 import { Feather } from '@expo/vector-icons';
+import * as SQLite from 'expo-sqlite';
+const db = SQLite.openDatabase('contacts.db');
 
-const contacts = [
-		{id: '1', name: 'Mahdi', email: 'mahdi@mail.com'},
-		{id: '2', name: 'Ali', email:'ali@mail.com'},
-		{id: '3', name: 'Ahmad', email:'Ahmad@mail.com'},
-		{id: '4', name: 'zahra', email:'Zahra@mail.com'},
-		{id: '5', name: 'Zainab', email:'Zainab@mail.com'},
-		{id: '6', name: 'Musa', email:'Musa@mail.com'},
-		{id: '7', name: 'Ewaz', email:'Ewaz@mail.com'},
-		{id: '8', name: 'Pablo', email:'Pablo@mail.com'},
-		{id: '9', name: 'David', email:'David@mail.com'},
-];
 export default function Contacts({ navigation }){
+
+	const [ contacts , setContacts ] = useState([]); 
+
+	useEffect(()=>{
+		db.transaction((tx)=>{
+			tx.executeSql('select * from contact',[],(tx, {rows})=>{
+				var data;
+				for(var i = 0; i < rows.length; i++){
+					data.push(rows[i]);
+				}
+				setContacts(data);
+			});
+		})
+	});
+
+	const deleteContact = (id) => {
+		db.transaction(tx => {
+			tx.executeSql('delete from contact where id = ?',[id]);
+		});
+	}
+
 	return (
 		<View>
-			<FlatList 
-				keyExtractor = { (item) => item.id }
-				data={contacts}	
-				renderItem = { ({item}) => {
-					return <ContactListItems name={item.name} phone={item.phone} onPress={ () => navigation.navigate('Profile',{item:item}) } />
-				}}
-			/>
+			
+			{
+				contacts ?
+				<FlatList 
+					keyExtractor = { (item) => item.id }
+					data={contacts}	
+					renderItem = { ({item}) => {
+						return <ContactListItems name={item.name} phone={item.phone} onPress={ () => navigation.navigate('Profile',{item:item}) } onDeleteContact = { () => deleteContact(item.id) } />
+					}}
+				/> :
+				<View>
+					<Text>No Contacts Found!</Text>
+				</View>
+			}
 
 			<TouchableOpacity style = {styles.floadButton} onPress={ () => navigation.navigate('CreateContacts') }>
 				<Text>

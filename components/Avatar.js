@@ -2,10 +2,10 @@ import React from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 
 export default function Avatar({ name, size }){
-	const initial = name[0].toUpperCase();
+	// const initial = name[0].toUpperCase();
 	return(
 		<View style={[styles.avatarContainer , {height: size, width: size} ]}>
-			<Text style={styles.avatarTxt}> {initial} </Text>
+			<Text style={styles.avatarTxt}> {name} </Text>
 		</View>	
 	)
 

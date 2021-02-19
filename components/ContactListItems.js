@@ -1,8 +1,9 @@
 import React from 'react';
 import {Text, StyleSheet, View, TouchableOpacity} from 'react-native';
 import Avatar from './Avatar.js';
+import { MaterialIcons } from '@expo/vector-icons';
 
-export default function ContactListItems({ name, phone, onPress }){
+export default function ContactListItems({ name, phone, onPress, onDeleteContact }){
 	return (
 		<TouchableOpacity style={styles.container} onPress={onPress}>
 			<View style = {styles.contactInfo}>
@@ -11,6 +12,7 @@ export default function ContactListItems({ name, phone, onPress }){
 					<Text style={styles.title}>{name}</Text>
 					<Text style={styles.subTitle}>{phone}</Text>
 				</View>
+				<MaterialCommunityIcons name="trash-can" color="red" size="24" onPress={onDeleteContact} />
 			</View>
 		</TouchableOpacity>
 	)

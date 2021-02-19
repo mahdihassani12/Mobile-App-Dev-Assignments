@@ -35,8 +35,8 @@ export default function App() {
                 )
               }) }
             />
+            <stack.Screen name="CreateContacts" component={ CreateContacts } />
     		<stack.Screen name="Search" component={ Search }  />
-    		<stack.Screen name="CreateContacts" component={ CreateContacts }  />
     		<stack.Screen name="Profile" component={ Profile }  />
     	</stack.Navigator>
     </NavigationContainer>
